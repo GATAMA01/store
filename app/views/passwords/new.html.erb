@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot your password?</title>
+    <style>
+
+      /* Form Container */
+      .container{
+        display:flex;
+        justify-content:center;
+      }
+      form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 30%;
+        max-width: 400px; /* Limit max width */
+      }
+
+      /* Heading Style */
+      h1 {
+        text-align: center;
+        color: #333;
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+
+      /* Flash Message */
+      .flash-message {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .flash-message .alert {
+        padding: 15px;
+        border-radius: 5px;
+        margin: 0 0 10px;
+        font-weight: bold;
+      }
+
+      .flash-message .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .flash-message .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      /* Form Elements */
+      input[type="email"], input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      input[type="email"]:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+      }
+
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      /* Responsive Design for Small Screens */
+      @media (max-width: 480px) {
+        form {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Flash message display -->
+      <div class="flash-message">
+        <%= tag.div(flash[:alert], class: "alert alert-danger") if flash[:alert] %>
+        <%= tag.div(flash[:notice], class: "alert alert-success") if flash[:notice] %>
+      </div>
+
+      <!-- Form -->
+      <%= form_with url: passwords_path do |form| %>
+        <h1>Forgot your password?</h1>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
+        <%= form.submit "Email reset instructions" %>
+      <% end %>
+    </div>
+  </body>
+</html>

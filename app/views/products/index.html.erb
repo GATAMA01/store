@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= t ".title" %></title>
+    <style>
+    
+      /* Heading */
+      h1 {
+        font-size: 2.5em;
+        color: #333;
+        margin: 20px;
+      }
+
+      /* Products Container */
+      #products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin: 0 20px;
+      }
+
+      /* Individual Product */
+      #products div {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      /* Hover Effects on Products */
+      #products div:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      #products div a {
+        font-size: 1.2em;
+        color: #333;
+        text-decoration: none;
+      }
+
+      #products div a:hover {
+        color: #4CAF50;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2em;
+        }
+
+        a {
+          font-size: 1em;
+        }
+
+        #products {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= t ".title" %></h1>
+
+  <% if @products.empty? %>
+    <p>Tidak ada produk.</p>
+  <% else %>
+    <ul>
+      <% @products.each do |product| %>
+        <li><%= product.name %> - <%= product.price %> - <%= product.description %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+    <%= link_to "New product", new_product_path %>
+
+    <div id="products">
+      <% @products.each do |product| %>
+        <div>
+          <%= link_to product.name, product %>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>
